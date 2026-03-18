@@ -21,6 +21,16 @@ const sectionIntroductions: Record<string, string> = {
 }
 
 const introduction = computed(() => sectionIntroductions[props.group.status] ?? '')
+
+const isMissing = computed(() => props.group.status === 'MISSING')
+
+const submitModalOpen = ref(false)
+const selectedItem = ref<ClauseStatusRecord | null>(null)
+
+function openSubmitModal(item: ClauseStatusRecord) {
+  selectedItem.value = item
+  submitModalOpen.value = true
+}
 </script>
 
 <template>
@@ -102,9 +112,25 @@ const introduction = computed(() => sectionIntroductions[props.group.status] ?? 
             <p class="text-xs font-medium uppercase text-muted">References</p>
             <p class="whitespace-pre-line text-sm text-toned">{{ item.references }}</p>
           </div>
+
+          <UButton
+            v-if="isMissing"
+            label="Submit info"
+            icon="i-lucide-upload"
+            color="primary"
+            variant="soft"
+            class="mt-1"
+            @click="openSubmitModal(item)"
+          />
         </div>
       </template>
     </UAccordion>
   </UCard>
+
+    <MissingInfoSubmitModal
+      v-if="isMissing && selectedItem"
+      v-model:open="submitModalOpen"
+      :item="selectedItem"
+    />
   </div>
 </template>
