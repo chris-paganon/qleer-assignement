@@ -13,17 +13,7 @@ const { data, status } = await useFetch<ComplianceGapSummaryDataset>(
 <template>
   <UDashboardPanel id="compliance-gap">
     <template #header>
-      <UDashboardNavbar
-        title="Compliance gap summary"
-        :ui="{ right: 'gap-3' }"
-      >
-        <template #leading>
-          <UDashboardSidebarCollapse />
-        </template>
-        <template #right>
-          <UColorModeButton />
-        </template>
-      </UDashboardNavbar>
+      <AppPageNavbar title="Compliance gap summary" />
     </template>
 
     <template #body>

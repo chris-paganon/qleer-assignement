@@ -87,17 +87,7 @@ const columns: TableColumn<ClauseStatusRecord>[] = [
     :ui="{ body: 'sm:p-0 p-0' }"
   >
     <template #header>
-      <UDashboardNavbar
-        title="Evaluations"
-        :ui="{ right: 'gap-3' }"
-      >
-        <template #leading>
-          <UDashboardSidebarCollapse />
-        </template>
-        <template #right>
-          <UColorModeButton />
-        </template>
-      </UDashboardNavbar>
+      <AppPageNavbar title="Evaluations" />
     </template>
 
     <template #body>
