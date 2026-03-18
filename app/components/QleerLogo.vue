@@ -1,13 +1,11 @@
 <script setup lang="ts">
 defineProps<{
-  collapsed?: boolean
-}>()
+  collapsed?: boolean;
+}>();
 </script>
 
 <template>
-  <NuxtLink
-    to="/dashboard"
-  >
+  <NuxtLink to="/">
     <UColorModeImage
       v-if="!collapsed"
       light="/logo_light.svg"
