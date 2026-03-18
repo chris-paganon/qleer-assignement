@@ -20,15 +20,14 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
     variant="subtle"
     :ui="{
       header: 'flex items-center justify-between gap-3',
-      body: 'p-0'
     }"
   >
     <template #header>
       <div class="min-w-0">
-        <p class="text-sm font-semibold text-highlighted">
+        <p class="font-semibold text-highlighted">
           {{ group.label }}
         </p>
-        <p class="text-sm text-muted">
+        <p class="text-muted">
           {{ group.count }} item{{ group.count === 1 ? '' : 's' }}
         </p>
       </div>
@@ -43,12 +42,6 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
       :items="accordionItems"
       type="multiple"
       :unmount-on-hide="false"
-      :ui="{
-        item: 'border-t first:border-t-0 border-default',
-        trigger: 'w-full px-4 py-4 hover:bg-muted/40 transition-colors',
-        body: 'px-4 pb-4 pt-0',
-        content: 'overflow-hidden'
-      }"
     >
       <template #default="{ item }">
         <div class="flex min-w-0 flex-col gap-1">
@@ -56,7 +49,7 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
             <span class="font-medium text-highlighted">
               {{ item.clause }}
             </span>
-            <span class="truncate text-sm text-toned">
+            <span class="text-toned">
               {{ item.title ?? 'Untitled requirement' }}
             </span>
             <UBadge
@@ -68,63 +61,33 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
           </div>
           <p
             v-if="item.summary"
-            class="line-clamp-2 text-sm text-muted"
+            class="line-clamp-2 text-muted"
           >
-            Requirement: {{ item.summary }}
+            {{ item.summary }}
           </p>
         </div>
       </template>
 
       <template #body="{ item }">
-        <div class="space-y-4">
-          <div class="flex flex-wrap items-center gap-2">
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs font-medium uppercase  text-muted">Justification</p>
+            <p class="whitespace-pre-line text-sm text-toned">{{ item.justification ?? 'No justification provided.' }}</p>
           </div>
 
-          <div class="grid gap-4 md:grid-cols-2">
-            <div class="space-y-1">
-              <p class="text-xs font-medium uppercase tracking-wide text-muted">
-                Justification
-              </p>
-              <p class="whitespace-pre-line text-sm text-toned">
-                {{ item.justification ?? 'No justification provided.' }}
-              </p>
-            </div>
+          <div v-if="item.applicable_if">
+            <p class="text-xs font-medium uppercase text-muted">Applicable if</p>
+            <p class="whitespace-pre-line text-sm text-toned">{{ item.applicable_if }}</p>
+          </div>
 
-            <div
-              v-if="item.applicable_if"
-              class="space-y-1"
-            >
-              <p class="text-xs font-medium uppercase tracking-wide text-muted">
-                Applicable if
-              </p>
-              <p class="whitespace-pre-line text-sm text-toned">
-                {{ item.applicable_if }}
-              </p>
-            </div>
+          <div v-if="item.conditions">
+            <p class="text-xs font-medium uppercase text-muted">Conditions</p>
+            <p class="whitespace-pre-line text-sm text-toned">{{ item.conditions }}</p>
+          </div>
 
-            <div
-              v-if="item.conditions"
-              class="space-y-1"
-            >
-              <p class="text-xs font-medium uppercase tracking-wide text-muted">
-                Conditions
-              </p>
-              <p class="whitespace-pre-line text-sm text-toned">
-                {{ item.conditions }}
-              </p>
-            </div>
-
-            <div
-              v-if="item.references"
-              class="space-y-1 md:col-span-2"
-            >
-              <p class="text-xs font-medium uppercase tracking-wide text-muted">
-                References
-              </p>
-              <p class="whitespace-pre-line text-sm text-toned">
-                {{ item.references }}
-              </p>
-            </div>
+          <div v-if="item.references">
+            <p class="text-xs font-medium uppercase text-muted">References</p>
+            <p class="whitespace-pre-line text-sm text-toned">{{ item.references }}</p>
           </div>
         </div>
       </template>
