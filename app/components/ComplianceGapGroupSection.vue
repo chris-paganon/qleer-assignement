@@ -13,10 +13,23 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
   value: item.id,
   label: `${item.clause} · ${item.title ?? 'Untitled requirement'}`
 })))
+
+const sectionIntroductions: Record<string, string> = {
+  'FAIL': 'These requirements did not pass compliance checks. Review each item, resolve the underlying issues, and re-evaluate to proceed with certification.',
+  'MISSING': 'These requirements lack the documentation or evidence needed for evaluation. Gather the required information and submit it to complete the assessment.',
+  'N/A': 'These requirements were flagged as not applicable. Verify each item to confirm it is correctly excluded or reclassify it if it should be in scope.'
+}
+
+const introduction = computed(() => sectionIntroductions[props.group.status] ?? '')
 </script>
 
 <template>
-  <UCard
+  <div>
+    <p class="mb-2 text-sm text-muted">
+      {{ introduction }}
+    </p>
+
+    <UCard
     variant="subtle"
     :ui="{
       header: 'flex items-center justify-between gap-3',
@@ -93,4 +106,5 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
       </template>
     </UAccordion>
   </UCard>
+  </div>
 </template>
