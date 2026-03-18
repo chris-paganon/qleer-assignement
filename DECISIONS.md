@@ -55,3 +55,7 @@ Handling files in the backend from submissions was not fully tested as this depe
 2. Handle missing info submissions
 3. Validate the submitted information with an LLM to verify compliance
 4. Update statuses in the frontend
+
+## Other
+
+I added some of antfu's Nuxt & Vue skills. I did not see all that much use for skills on the react-side recently, so I was curious how well it would perform here. I must say I was not very impressed with Codex's UI working with Vue. Claude did pretty well however.
