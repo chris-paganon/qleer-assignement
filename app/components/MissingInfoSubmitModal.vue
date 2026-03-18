@@ -53,16 +53,14 @@ async function onSubmit() {
     state.comment = ''
     state.files = []
     open.value = false
-  }
-  catch {
+  } catch {
     toast.add({
       title: 'Submission failed',
       description: 'Something went wrong. Please try again.',
       color: 'error',
       icon: 'i-lucide-alert-circle'
     })
-  }
-  finally {
+  } finally {
     submitting.value = false
   }
 }
@@ -81,7 +79,11 @@ async function onSubmit() {
         class="space-y-4"
         @submit="onSubmit"
       >
-        <UFormField name="comment" label="Comment" required>
+        <UFormField
+          name="comment"
+          label="Comment"
+          required
+        >
           <UTextarea
             v-model="state.comment"
             placeholder="Provide the missing information or explanation..."
@@ -90,7 +92,10 @@ async function onSubmit() {
           />
         </UFormField>
 
-        <UFormField name="files" label="Supporting documents">
+        <UFormField
+          name="files"
+          label="Supporting documents"
+        >
           <UFileUpload
             v-model="state.files"
             multiple
