@@ -15,8 +15,8 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
 })))
 
 const sectionIntroductions: Record<string, string> = {
-  'FAIL': 'These requirements did not pass compliance checks. Review each item, resolve the underlying issues, and re-evaluate to proceed with certification.',
-  'MISSING': 'These requirements lack the documentation or evidence needed for evaluation. Gather the required information and submit it to complete the assessment.',
+  'FAIL': 'These requirements did not pass compliance checks. Review each item and resolve the underlying issues.',
+  'MISSING': 'These requirements lack the documentation or evidence needed for evaluation. Gather the required information and submit them to verify compliance.',
   'N/A': 'These requirements were flagged as not applicable. Verify each item to confirm it is correctly excluded or reclassify it if it should be in scope.'
 }
 
