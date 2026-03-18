@@ -2,10 +2,13 @@
 import { UBadge } from '#components'
 import type { TableColumn } from '@nuxt/ui'
 
-const { data, status } = await useFetch<ClauseStatusRecord[]>('/api/evaluation', {
-  key: 'evaluation',
-  lazy: true
-})
+const { data, status } = await useFetch<ClauseStatusRecord[]>(
+  '/api/evaluation',
+  {
+    key: 'evaluation',
+    lazy: true
+  }
+)
 
 const columns: TableColumn<ClauseStatusRecord>[] = [
   {
@@ -51,12 +54,13 @@ const columns: TableColumn<ClauseStatusRecord>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => row.getValue('status')
-      ? h(UBadge, {
-          ...getStatusBadgeProps(row.getValue('status')),
-          variant: 'subtle'
-        })
-      : '',
+    cell: ({ row }) =>
+      row.getValue('status')
+        ? h(UBadge, {
+            ...getStatusBadgeProps(row.getValue('status')),
+            variant: 'subtle'
+          })
+        : '',
     meta: {
       class: {
         th: 'w-1/12 min-w-[150px]',

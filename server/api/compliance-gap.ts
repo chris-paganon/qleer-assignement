@@ -9,8 +9,8 @@ import evaluationFixture from '~~/server/data/evaluation.json'
 const statusOrder: ComplianceGapStatus[] = ['FAIL', 'MISSING', 'N/A']
 
 const statusLabels: Record<ComplianceGapStatus, string> = {
-  FAIL: 'Fails',
-  MISSING: 'Missing info',
+  'FAIL': 'Fails',
+  'MISSING': 'Missing info',
   'N/A': 'Not applicable'
 }
 

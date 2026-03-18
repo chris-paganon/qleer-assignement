@@ -1,23 +1,26 @@
 <script setup lang="ts">
-import type { ComplianceGapSummaryDataset } from "~~/shared/types/evaluation";
+import type { ComplianceGapSummaryDataset } from '~~/shared/types/evaluation'
 
 const { data, status } = await useFetch<ComplianceGapSummaryDataset>(
-  "/api/compliance-gap",
+  '/api/compliance-gap',
   {
-    key: "compliance-gap",
-    lazy: true,
+    key: 'compliance-gap',
+    lazy: true
   }
-);
+)
 
 const totalItems = computed(
   () => data.value?.reduce((sum, group) => sum + group.count, 0) ?? 0
-);
+)
 </script>
 
 <template>
   <UDashboardPanel id="compliance-gap">
     <template #header>
-      <UDashboardNavbar title="Compliance gap summary" :ui="{ right: 'gap-3' }">
+      <UDashboardNavbar
+        title="Compliance gap summary"
+        :ui="{ right: 'gap-3' }"
+      >
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
@@ -30,18 +33,13 @@ const totalItems = computed(
           <UColorModeButton />
         </template>
       </UDashboardNavbar>
-      <UDashboardToolbar>
-        <template #left>
-          <p class="text-sm text-muted">
-            Non-passing requirements grouped by outcome. Order is `FAIL`,
-            `MISSING INFO`, then `N/A`.
-          </p>
-        </template>
-      </UDashboardToolbar>
     </template>
 
     <template #body>
-      <div v-if="status === 'pending'" class="space-y-4">
+      <div
+        v-if="status === 'pending'"
+        class="space-y-4"
+      >
         <USkeleton class="h-40 w-full rounded-xl" />
         <USkeleton class="h-40 w-full rounded-xl" />
         <USkeleton class="h-40 w-full rounded-xl" />
@@ -51,7 +49,10 @@ const totalItems = computed(
         v-else-if="!data || !data.length"
         class="flex min-h-80 items-center justify-center"
       >
-        <UCard variant="subtle" class="w-full max-w-xl">
+        <UCard
+          variant="subtle"
+          class="w-full max-w-xl"
+        >
           <div class="space-y-2 text-center">
             <p class="text-base font-semibold text-highlighted">
               No compliance gaps
@@ -64,7 +65,10 @@ const totalItems = computed(
         </UCard>
       </div>
 
-      <div v-else class="space-y-6">
+      <div
+        v-else
+        class="space-y-6"
+      >
         <ComplianceGapGroupSection
           v-for="group in data"
           :key="group.status"
