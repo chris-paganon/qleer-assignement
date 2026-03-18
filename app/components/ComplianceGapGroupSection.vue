@@ -34,8 +34,7 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
       </div>
 
       <UBadge
-        :label="String(group.count)"
-        :color="getStatusBadgeProps(group.status).color"
+        v-bind="getStatusBadgeProps(props.group.status)"
         variant="subtle"
       />
     </template>
@@ -60,12 +59,18 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
             <span class="truncate text-sm text-toned">
               {{ item.title ?? 'Untitled requirement' }}
             </span>
+            <UBadge
+              :label="item.standard.ref"
+              color="neutral"
+              variant="outline"
+              class="ml-4"
+            />
           </div>
           <p
             v-if="item.summary"
             class="line-clamp-2 text-sm text-muted"
           >
-            {{ item.summary }}
+            Requirement: {{ item.summary }}
           </p>
         </div>
       </template>
@@ -73,27 +78,9 @@ const accordionItems = computed<ComplianceGapAccordionItem[]>(() => props.group.
       <template #body="{ item }">
         <div class="space-y-4">
           <div class="flex flex-wrap items-center gap-2">
-            <UBadge
-              v-bind="getStatusBadgeProps(item.status)"
-              variant="subtle"
-            />
-            <UBadge
-              :label="item.standard.ref"
-              color="neutral"
-              variant="outline"
-            />
           </div>
 
           <div class="grid gap-4 md:grid-cols-2">
-            <div class="space-y-1">
-              <p class="text-xs font-medium uppercase tracking-wide text-muted">
-                Requirement
-              </p>
-              <p class="whitespace-pre-line text-sm text-toned">
-                {{ item.summary ?? 'No summary provided.' }}
-              </p>
-            </div>
-
             <div class="space-y-1">
               <p class="text-xs font-medium uppercase tracking-wide text-muted">
                 Justification
