@@ -20,28 +20,36 @@ const stats = computed(() => {
       label: 'Total issues',
       value: totalItems,
       icon: 'i-lucide-alert-triangle',
-      color: 'primary' as const
+      color: 'primary' as const,
+      target: 'gap-FAIL'
     },
     {
       label: 'Fails',
       value: byStatus.FAIL?.count ?? 0,
       icon: 'i-lucide-x-circle',
-      color: 'error' as const
+      color: 'error' as const,
+      target: 'gap-FAIL'
     },
     {
       label: 'Missing info',
       value: byStatus.MISSING?.count ?? 0,
       icon: 'i-lucide-alert-circle',
-      color: 'warning' as const
+      color: 'warning' as const,
+      target: 'gap-MISSING'
     },
     {
       label: 'Not applicable',
       value: byStatus['N/A']?.count ?? 0,
       icon: 'i-lucide-minus-circle',
-      color: 'neutral' as const
+      color: 'neutral' as const,
+      target: 'gap-N/A'
     }
   ]
 })
+
+function scrollToSection(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
 </script>
 
 <template>
@@ -92,6 +100,8 @@ const stats = computed(() => {
             v-for="stat in stats"
             :key="stat.label"
             variant="subtle"
+            class="cursor-pointer transition-shadow hover:ring-1 hover:ring-default"
+            @click="scrollToSection(stat.target)"
           >
             <div class="flex items-start gap-3">
               <div
@@ -122,6 +132,7 @@ const stats = computed(() => {
 
         <ComplianceGapGroupSection
           v-for="group in data"
+          :id="`gap-${group.status}`"
           :key="group.status"
           :group="group"
         />
