@@ -20,7 +20,7 @@ const sectionIntroductions: Record<string, string> = {
   'N/A': 'These requirements were flagged as not applicable. Verify each item to confirm it is correctly excluded or reclassify it if it should be in scope.'
 }
 
-const introduction = computed(() => sectionIntroductions[props.group.status] ?? '')
+const introduction = computed(() => sectionIntroductions[props.group.status])
 
 const isMissing = computed(() => props.group.status === 'MISSING')
 
@@ -91,6 +91,26 @@ function openSubmitModal(item: ClauseStatusRecord) {
           </div>
         </template>
 
+        <template
+          v-if="isMissing"
+          #trailing="{ item, open }"
+        >
+          <div class="flex grow items-center justify-end gap-2">
+            <UButton
+              label="Submit info"
+              icon="i-lucide-upload"
+              color="primary"
+              variant="soft"
+              @click.stop="openSubmitModal(item)"
+            />
+            <UIcon
+              name="i-lucide-chevron-down"
+              class="size-5 transition-transform duration-200"
+              :class="{ 'rotate-180': open }"
+            />
+          </div>
+        </template>
+
         <template #body="{ item }">
           <div class="space-y-3">
             <div>
@@ -128,16 +148,6 @@ function openSubmitModal(item: ClauseStatusRecord) {
                 {{ item.references }}
               </p>
             </div>
-
-            <UButton
-              v-if="isMissing"
-              label="Submit info"
-              icon="i-lucide-upload"
-              color="primary"
-              variant="soft"
-              class="mt-1"
-              @click="openSubmitModal(item)"
-            />
           </div>
         </template>
       </UAccordion>
