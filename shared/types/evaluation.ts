@@ -1,4 +1,5 @@
 export type ClauseStatus = '' | 'PASS' | 'MISSING' | 'FAIL' | 'N/A'
+export type ComplianceGapStatus = Extract<ClauseStatus, 'FAIL' | 'MISSING' | 'N/A'>
 
 export type EvaluationJobType = 'JUDGE' | 'TITLE'
 
@@ -28,3 +29,12 @@ export interface ClauseStatusRecord {
 }
 
 export type EvaluationDataset = ClauseStatusRecord[]
+
+export interface ComplianceGapGroup {
+  status: ComplianceGapStatus
+  label: string
+  count: number
+  items: ClauseStatusRecord[]
+}
+
+export type ComplianceGapSummaryDataset = ComplianceGapGroup[]

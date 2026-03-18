@@ -5,9 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink
-    to="/dashboard"
-  >
+  <NuxtLink to="/">
     <UColorModeImage
       v-if="!collapsed"
       light="/logo_light.svg"
