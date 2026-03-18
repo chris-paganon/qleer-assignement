@@ -98,7 +98,6 @@ const columns: TableColumn<ClauseStatusRecord>[] = [
           <UColorModeButton />
         </template>
       </UDashboardNavbar>
-      <UDashboardToolbar />
     </template>
 
     <template #body>

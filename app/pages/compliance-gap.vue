@@ -8,10 +8,6 @@ const { data, status } = await useFetch<ComplianceGapSummaryDataset>(
     lazy: true
   }
 )
-
-const totalItems = computed(
-  () => data.value?.reduce((sum, group) => sum + group.count, 0) ?? 0
-)
 </script>
 
 <template>
@@ -25,11 +21,6 @@ const totalItems = computed(
           <UDashboardSidebarCollapse />
         </template>
         <template #right>
-          <UBadge
-            :label="`${totalItems} open item${totalItems === 1 ? '' : 's'}`"
-            color="neutral"
-            variant="subtle"
-          />
           <UColorModeButton />
         </template>
       </UDashboardNavbar>
