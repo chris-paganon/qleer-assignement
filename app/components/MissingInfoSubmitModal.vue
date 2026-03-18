@@ -45,7 +45,7 @@ async function onSubmit() {
 
     toast.add({
       title: 'Information submitted',
-      description: `Details for ${props.item.clause} have been submitted for review.`,
+      description: `Details for ${props.item.clause} have been submitted.`,
       color: 'success',
       icon: 'i-lucide-check-circle'
     })
