@@ -1,24 +1,36 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from "@nuxt/ui";
 
-const open = ref(false)
+const open = ref(false);
 
-const links = [[
+const links = [
+  [
+    {
+      label: "Evaluations",
+      icon: "i-lucide-shield-check",
+      to: "/",
+      onSelect: () => {
+        open.value = false;
+      },
+    },
+    {
+      label: "Compliance gap",
+      icon: "i-lucide-list-x",
+      to: "/compliance-gap",
+      onSelect: () => {
+        open.value = false;
+      },
+    },
+  ],
+] satisfies NavigationMenuItem[][];
+
+const groups = computed(() => [
   {
-    label: 'Evaluations',
-    icon: 'i-lucide-shield-check',
-    to: '/',
-    onSelect: () => {
-      open.value = false
-    }
-  }
-]] satisfies NavigationMenuItem[][]
-
-const groups = computed(() => [{
-  id: 'links',
-  label: 'Go to',
-  items: links.flat()
-}])
+    id: "links",
+    label: "Go to",
+    items: links.flat(),
+  },
+]);
 </script>
 
 <template>
